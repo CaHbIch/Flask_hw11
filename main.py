@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 
+from candidate import Candidates
 from config import path
 from data_candidate import DataCandidates
 
@@ -7,24 +8,32 @@ app = Flask(__name__)
 
 data_candidates = DataCandidates(path)
 
+
+
 @app.route('/')
 def list_():
-    return render_template('list.html', alls_name=data_candidates.get_name(), title="Кандидаты", all="Все кандидаты")
+    return render_template('list.html',
+                           data_candidates=data_candidates.load_candidate(),
+                           title="Кандидаты",
+                           all="Все кандидаты")
 
 
-@app.route('/candidate/<int:pk>')
+@app.route('/candidate/<int:pk>/')
 def single(pk):
-    return render_template('single.html', candidates=data_candidates.get_id(pk), title="Кандидат", all="Данные о кандидате")
+    return render_template('single.html',
+                        candidates=data_candidates.get_id(pk),
+                        title="Кандидат",
+                        all="Данные о кандидате")
 
 
 @app.route('/search/<candidate_name>')
 def search():
-    return render_template('search.html')
-
-
-@app.route('/search/<skill_name>')
-def skill_name():
-    return render_template('skill.html')
+    return render_template('search.html', candidate_name = data_candidates.get_name())
+#
+#
+# @app.route('/search/<skill_name>')
+# def skill_name():
+#     return render_template('skill.html')
 
 
 @app.route('/index/')

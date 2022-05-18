@@ -22,7 +22,7 @@ class DataCandidates:
                 position = candidat["position"]
                 gender = candidat["gender"]
                 age = candidat["age"]
-                skills = candidat["skills"].lower().strip().split(", ")
+                skills = candidat["skills"]
 
                 candidats = Candidates(pk, name, picture, position, gender, age, skills)
                 candidates.append(candidats)
@@ -45,8 +45,10 @@ class DataCandidates:
         gets_name = self.load_candidate()
         names = []
         for candidate_name in gets_name:
-            names.append(candidate_name.name)
+            if candidate_name in gets_name:
+                names.append(candidate_name.name)
         return names
+
 
     def get_skills(self, skills):
         """возвращает навыки кандидатов"""
@@ -55,6 +57,6 @@ class DataCandidates:
             if candidate_skils.skills == skills:
                 return candidate_skils
 
-
-# data = DataCandidates(path)
-# print(data.get_id(2))
+# #
+data = DataCandidates(path)
+print(data.get_name())

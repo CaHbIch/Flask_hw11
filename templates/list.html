@@ -6,8 +6,14 @@
 </head>
 <body>
 <h1>{{all}}</h1>
-{% for name in alls_name %}
-    <p><a href="/candidate/<int:pk>">Кандидат: {{name}}</a></p>
+<ul>{% for name in data_candidates %}
+    <p><a href="/candidate/{{name.pk}}">Кандидат: {{name.name}}</a></p>
 {% endfor %}
+</ul>
+<form action="/search/">
+  <p>Поиск по совпадению имен:</p>
+  <p><input type="text" name=""></p>
+  <p><input type="submit" value="Отправить"></p>
+</form>
 </body>
 </html>
