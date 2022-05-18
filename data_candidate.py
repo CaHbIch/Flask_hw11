@@ -1,8 +1,6 @@
 import json
 
 from candidate import Candidates
-from config import path
-from pprint import pprint as pp
 
 
 class DataCandidates:
@@ -17,7 +15,7 @@ class DataCandidates:
             candidates = []
             for candidat in file:
                 pk = candidat["id"]
-                name = candidat["name"].lower()
+                name = candidat["name"]
                 picture = candidat["picture"]
                 position = candidat["position"]
                 gender = candidat["gender"]
@@ -33,29 +31,28 @@ class DataCandidates:
         """ возвращает одного кандидата по его pk"""
         gets_id = self.load_candidate()
         candidates_get_id = []
-        for candidate_id in gets_id:
-            if candidate_id.pk == pk:
-                candidates_get_id.append(candidate_id.position)
-                candidates_get_id.append(candidate_id.picture)
-                candidates_get_id.append(candidate_id.skills)
+        for candidate in gets_id:
+            if candidate.pk == pk:
+                candidates_get_id.append(candidate.position)
+                candidates_get_id.append(candidate.picture)
+                candidates_get_id.append(candidate.skills)
         return candidates_get_id
 
-    def get_name(self):
+    def get_by_name(self, name):
         """возвращает имена кандидатов"""
-        gets_name = self.load_candidate()
-        names = []
-        for candidate_name in gets_name:
-            names.append(candidate_name.name)
-        return names
+        candidates = self.load_candidate()
+        candidates_match = []
+        for candidate in candidates:
+            if name.lower() in candidate.name.lower():
+                candidates_match.append(candidate)
+        return candidates_match
 
-
-    def get_skills(self, skills):
+    def get_by_skills(self, skills):
         """возвращает навыки кандидатов"""
-        gets_skills = self.load_candidate()
-        for candidate_skils in gets_skills:
-            if candidate_skils.skills == skills:
-                return candidate_skils
-
-
-# data = DataCandidates(path)
-# pp(data.get_name())
+        skill = self.load_candidate()
+        get_skills = []
+        for candidate_skills in skill:
+            get_skill = candidate_skills.skills.lower().split(', ')
+            if skills in get_skill:
+                get_skills.append(candidate_skills)
+        return get_skills

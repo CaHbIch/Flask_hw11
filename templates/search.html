@@ -6,6 +6,8 @@
 </head>
 <body>
 <h1>Найдено кандидатов {{ count_names }}</h1>
-<p>{{ candidate_name }}</p>
+{% for candidate in candidates %}
+    <p><a href="/candidate/{{ candidate.pk }}">Кандидат: {{ candidate.name }}</a></p>
+{% endfor %}
 </body>
 </html>

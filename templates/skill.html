@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Поиск по навыкам</title>
+    <title>{{title}}</title>
 </head>
 <body>
-<h1>Найдено со скиллом X: </h1>
-<p><a href="">Имя кандидата</a></p>
+<h1>Найдено с навыком {{ count_skills }} </h1>
+{% for skill in get_by_skills %}
+    <p><a href="/candidate/{{ skill.pk }}">Кандидат: {{ skill.skills }}</a></p>
+{% endfor %}
 </body>
 </html>

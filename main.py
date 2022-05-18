@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 from config import path
 from data_candidate import DataCandidates
@@ -24,20 +24,28 @@ def single(pk):
                            all="Данные о кандидате")
 
 
+@app.route('/search/')
 @app.route('/search/<name>')
-def search(name):
-    count_name = []
-    if name in data_candidates.get_name():
-        count_name.append(name)
+def search(name=None):
+    if name is None:
+        name = request.args.get('query')
+    candidates = data_candidates.get_by_name(name)
     return render_template('search.html',
                            title="Найдено кандидатов",
-                           candidate_name=count_name,
-                           count_names=len(count_name))
+                           candidates=candidates,
+                           count_names=len(candidates))
 
 
-# @app.route('/search/<skill_name>')
-# def skill_name():
-#     return render_template('skill.html')
+@app.route('/skill/')
+@app.route('/skill/<skills>')
+def skill_name(skills=None):
+    if skills is None:
+        skills = request.args.get("skill")
+    get_by_skills = data_candidates.get_by_skills(skills)
+    return render_template('skill.html',
+                           title="Поиск по навыкам",
+                           get_by_skills=get_by_skills,
+                           count_skills=len(get_by_skills))
 
 
 @app.route('/index/')
