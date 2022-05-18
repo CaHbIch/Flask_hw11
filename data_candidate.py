@@ -52,5 +52,5 @@ class DataCandidates:
                 return candidate_skils
 
 
-# data = DataCandidates(path)
-# print(data.get_name())
+data = DataCandidates(path)
+print(data.get_name())
