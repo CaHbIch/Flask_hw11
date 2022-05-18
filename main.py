@@ -14,8 +14,7 @@ def list_():
 
 @app.route('/candidate/<int:pk>')
 def single(pk):
-    candidates = data_candidates.get_id(pk)
-    return render_template('single.html', candidate=candidates, title="Кандидат", all="Данные о кандидате")
+    return render_template('single.html', candidates=data_candidates.get_id(pk), title="Кандидат", all="Данные о кандидате")
 
 
 @app.route('/search/<candidate_name>')

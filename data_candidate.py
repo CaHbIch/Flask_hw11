@@ -24,7 +24,7 @@ class DataCandidates:
                 age = candidat["age"]
                 skills = candidat["skills"].lower().strip().split(", ")
 
-                candidats = Candidates(pk, name, position, picture, gender, age, skills)
+                candidats = Candidates(pk, name, picture, position, gender, age, skills)
                 candidates.append(candidats)
 
             return tuple(candidates)
@@ -32,9 +32,13 @@ class DataCandidates:
     def get_id(self, pk):
         """ возвращает одного кандидата по его pk"""
         gets_id = self.load_candidate()
+        candidates_get_id = []
         for candidate_id in gets_id:
             if candidate_id.pk == pk:
-                return candidate_id
+                candidates_get_id.append(candidate_id.position)
+                candidates_get_id.append(candidate_id.picture)
+                candidates_get_id.append(candidate_id.skills)
+        return candidates_get_id
 
     def get_name(self):
         """возвращает имена кандидатов"""
@@ -52,5 +56,5 @@ class DataCandidates:
                 return candidate_skils
 
 
-data = DataCandidates(path)
-print(data.get_name())
+# data = DataCandidates(path)
+# print(data.get_id(2))
