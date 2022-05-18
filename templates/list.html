@@ -10,9 +10,11 @@
     <p><a href="/candidate/{{name.pk}}">Кандидат: {{name.name}}</a></p>
 {% endfor %}
 </ul>
-<form action="/search/">
+<form action="/search/name">
   <p>Поиск по совпадению имен:</p>
-  <p><input type="text" name=""></p>
+  <p><label>
+      <input type="text" name="input">
+  </label></p>
   <p><input type="submit" value="Отправить"></p>
 </form>
 </body>

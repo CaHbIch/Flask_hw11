@@ -17,7 +17,7 @@ class DataCandidates:
             candidates = []
             for candidat in file:
                 pk = candidat["id"]
-                name = candidat["name"]
+                name = candidat["name"].lower()
                 picture = candidat["picture"]
                 position = candidat["position"]
                 gender = candidat["gender"]
@@ -45,8 +45,7 @@ class DataCandidates:
         gets_name = self.load_candidate()
         names = []
         for candidate_name in gets_name:
-            if candidate_name in gets_name:
-                names.append(candidate_name.name)
+            names.append(candidate_name.name)
         return names
 
 
@@ -57,6 +56,6 @@ class DataCandidates:
             if candidate_skils.skills == skills:
                 return candidate_skils
 
-# #
-data = DataCandidates(path)
-print(data.get_name())
+
+# data = DataCandidates(path)
+# pp(data.get_name())
